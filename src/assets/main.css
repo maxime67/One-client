@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+ /*Custom Styles*/
+body {
+    @apply bg-dark-800 text-white;
+}
+
+/* Scrollbar styles for Firefox */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #5FCFDA #1f2937;
+}
+
+/* Custom transitions */
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+
+/* Futuristic UI Elements */
+.glow {
+    box-shadow: 0 0 15px rgba(95, 207, 218, 0.3);
+}
+
+.glow:hover {
+    box-shadow: 0 0 25px rgba(95, 207, 218, 0.5);
+}
+
+.border-glow {
+    border: 1px solid rgba(95, 207, 218, 0.3);
+}
+
+.border-glow:hover {
+    border-color: rgba(95, 207, 218, 0.6);
+}
+
+/* Form Elements */
+.input-futuristic {
+    @apply bg-dark-700 border border-dark-400 text-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-400;
+}
+
+.button-primary {
+    @apply bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded-lg transition focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 focus:ring-offset-dark-700;
+}
+
+.button-secondary {
+    @apply bg-dark-600 hover:bg-dark-500 text-white font-medium py-2 px-4 rounded-lg transition focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2 focus:ring-offset-dark-700;
+}
+
+.card {
+    @apply bg-dark-600 border border-primary-500/20 rounded-xl overflow-hidden shadow-lg;
+}
+
+.card-header {
+    @apply p-5 border-b border-dark-500;
+}
+
+.card-body {
+    @apply p-5;
+}
