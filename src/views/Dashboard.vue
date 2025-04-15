@@ -159,7 +159,7 @@ import { ref, onMounted } from 'vue';
 import LoadingSpinner from '../components/common/LoadingSpinner.vue';
 import StatisticsCard from '../components/dashboard/StatisticsCard.vue';
 import SeverityDistribution from '../components/dashboard/SeverityDistribution.vue';
-import TimelineChart from '../components/dashboard/TimelineChart.vue';
+// import TimelineChart from '../components/dashboard/TimelineChart.vue';
 import RecentCvesList from '../components/dashboard/RecentCvesList.vue';
 import cveService from '../services/cveService';
 import vendorService from '../services/vendorService';
@@ -171,7 +171,7 @@ export default {
     LoadingSpinner,
     StatisticsCard,
     SeverityDistribution,
-    TimelineChart,
+    // TimelineChart,
     RecentCvesList
   },
   setup() {
