@@ -171,7 +171,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
-import { AuthService } from '@/services/AuthService';
+import { AuthService } from '@/services/authService';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();

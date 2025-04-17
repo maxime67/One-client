@@ -96,7 +96,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { AuthService } from '@/services/AuthService';
+import { AuthService } from '@/services/authService';
 
 const router = useRouter();
 
