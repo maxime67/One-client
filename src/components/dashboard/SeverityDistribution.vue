@@ -6,7 +6,7 @@
       <canvas ref="chartCanvas"></canvas>
     </div>
 
-    <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 mt-6">
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
       <div v-for="(item, index) in severityItems" :key="index"
            class="flex flex-col items-center p-2 rounded"
            :class="`bg-${item.color}-500/10 border border-${item.color}-500/20`">
@@ -31,8 +31,7 @@ export default {
         CRITICAL: 0,
         HIGH: 0,
         MEDIUM: 0,
-        LOW: 0,
-        NONE: 0
+        LOW: 0
       })
     }
   },
@@ -45,7 +44,6 @@ export default {
       { label: 'High', color: 'warning', key: 'HIGH' },
       { label: 'Medium', color: 'orange', key: 'MEDIUM' },
       { label: 'Low', color: 'success', key: 'LOW' },
-      { label: 'None', color: 'gray', key: 'NONE' }
     ];
 
     const createChart = () => {

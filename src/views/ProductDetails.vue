@@ -58,10 +58,6 @@
                 <div class="text-sm text-gray-400">CVEs</div>
                 <div class="text-xl font-bold text-white">{{ product.cveCount || 0 }}</div>
               </div>
-              <div v-if="product.versions" class="bg-primary-500/10 px-4 py-2 rounded-lg border border-primary-500/30">
-                <div class="text-sm text-gray-400">Versions</div>
-                <div class="text-xl font-bold text-white">{{ product.versions.length || 0 }}</div>
-              </div>
             </div>
             <div class="text-sm text-gray-400 mt-2">
               Last Updated: <span class="text-white">{{ formatDate(product.lastSeen) }}</span>
@@ -83,52 +79,6 @@
               <SeverityDistribution :data="stats.severityDistribution"/>
               <div class="mt-4 text-center text-sm text-gray-400">
                 Average CVSS Score: <span class="text-white font-medium">{{ stats.avgCvssScore }}</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Affected Versions -->
-          <div v-if="productVersions && productVersions.versions && productVersions.versions.length > 0"
-               class="bg-dark-600 border border-primary-500/20 rounded-xl overflow-hidden">
-            <div class="p-5 border-b border-dark-500">
-              <h2 class="text-lg font-medium text-white">Affected Versions</h2>
-            </div>
-            <div class="p-5">
-              <div v-if="stats && stats.versionStats" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <div class="bg-dark-700 rounded-lg p-4 text-center">
-                  <div class="text-gray-400 text-sm mb-1">Total Versions</div>
-                  <div class="text-xl font-bold text-white">{{ stats.versionStats.total }}</div>
-                </div>
-                <div class="bg-danger-500/10 rounded-lg p-4 text-center border border-danger-500/30">
-                  <div class="text-gray-400 text-sm mb-1">Affected</div>
-                  <div class="text-xl font-bold text-danger-400">{{ stats.versionStats.affected }}</div>
-                </div>
-                <div class="bg-success-500/10 rounded-lg p-4 text-center border border-success-500/30">
-                  <div class="text-gray-400 text-sm mb-1">Not Affected</div>
-                  <div class="text-xl font-bold text-success-400">{{ stats.versionStats.notAffected }}</div>
-                </div>
-              </div>
-
-              <div class="flex flex-wrap gap-2">
-                <span
-                    v-for="(version, index) in productVersions.versions"
-                    :key="index"
-                    class="inline-flex items-center px-3 py-1 rounded-md text-sm font-medium"
-                    :class="version.affected
-                      ? 'bg-danger-500/10 text-danger-300 border border-danger-500/30'
-                      : 'bg-success-500/10 text-success-300 border border-success-500/30'"
-                >
-                  {{ version.version }}
-                  <svg v-if="version.affected" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none"
-                       viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-                  </svg>
-                  <svg v-else xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24"
-                       stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-                  </svg>
-                </span>
               </div>
             </div>
           </div>
@@ -202,9 +152,9 @@
 </template>
 
 <script>
-import { ref, onMounted, onBeforeUnmount, watch } from 'vue'; // Import onBeforeUnmount and watch
-import { useRoute } from 'vue-router';
-import { format } from 'date-fns';
+import {ref, onMounted, onBeforeUnmount, watch} from 'vue'; // Import onBeforeUnmount and watch
+import {useRoute} from 'vue-router';
+import {format} from 'date-fns';
 import Chart from 'chart.js/auto';
 import LoadingSpinner from '../components/common/LoadingSpinner.vue';
 import SeverityDistribution from '../components/dashboard/SeverityDistribution.vue';
@@ -240,13 +190,14 @@ export default {
     const cvesLoading = ref(false);
     const currentCVEPage = ref(1);
     const totalCVEPages = ref(1);
+    console.log(stats)
 
     const fetchProduct = async (productId) => {
       loading.value = true;
       error.value = false;
 
       try {
-        const { data } = await productService.getProductById(productId);
+        const {data} = await productService.getProductById(productId);
         product.value = data;
 
         // Fetch product stats
@@ -271,7 +222,7 @@ export default {
     const fetchProductCVEs = async (productId) => {
       cvesLoading.value = true;
       try {
-        const { data } = await productService.getProductCVEs(
+        const {data} = await productService.getProductCVEs(
             productId,
             currentCVEPage.value,
             5
@@ -334,10 +285,6 @@ export default {
         (newId) => {
           if (newId) {
             // Destroy the old chart before fetching data for the new product
-            if (timelineChart.value) {
-              timelineChart.value.destroy();
-              timelineChart.value = null; // Reset the ref
-            }
             currentCVEPage.value = 1; // Reset CVE pagination
             cves.value = [];
             fetchProduct(newId);

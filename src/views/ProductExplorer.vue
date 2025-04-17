@@ -109,10 +109,10 @@
             <div class="text-xs text-gray-400">CVEs</div>
           </div>
 
-          <div v-if="product.versions" class="bg-primary-500/10 rounded-lg p-3 text-center flex-1">
-            <div class="text-primary-400 text-lg font-semibold">{{ product.versions.length || 0 }}</div>
-            <div class="text-xs text-gray-400">Versions</div>
-          </div>
+<!--          <div v-if="product.versions" class="bg-primary-500/10 rounded-lg p-3 text-center flex-1">-->
+<!--            <div class="text-primary-400 text-lg font-semibold">{{ product.versions.length || 0 }}</div>-->
+<!--            <div class="text-xs text-gray-400">Versions</div>-->
+<!--          </div>-->
         </div>
       </router-link>
     </div>

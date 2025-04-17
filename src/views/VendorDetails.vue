@@ -49,7 +49,7 @@
               </div>
               <div class="bg-secondary-500/10 px-4 py-2 rounded-lg border border-secondary-500/30">
                 <div class="text-sm text-gray-400">Products</div>
-                <div class="text-xl font-bold text-white">{{ vendor.productCount || 0 }}</div>
+                <div class="text-xl font-bold text-white">{{ products.length || 0 }}</div>
               </div>
             </div>
           </div>
@@ -62,9 +62,6 @@
         <div class="space-y-6 lg:col-span-2">
           <!-- CVE Severity Distribution -->
           <div v-if="stats" class="bg-dark-600 border border-primary-500/20 rounded-xl overflow-hidden">
-            <div class="p-5 border-b border-dark-500">
-              <h2 class="text-lg font-medium text-white">CVE Severity Distribution</h2>
-            </div>
             <div class="p-5">
               <SeverityDistribution :data="stats.severityDistribution" />
               <div class="mt-4 text-center text-sm text-gray-400">
@@ -73,15 +70,6 @@
             </div>
           </div>
 
-          <!-- CVE Timeline -->
-          <div v-if="stats && stats.cveTimeline" class="bg-dark-600 border border-primary-500/20 rounded-xl overflow-hidden">
-            <div class="p-5 border-b border-dark-500">
-              <h2 class="text-lg font-medium text-white">CVE Timeline (Last 12 Months)</h2>
-            </div>
-            <div class="p-5 h-80">
-              <canvas ref="timelineChart"></canvas>
-            </div>
-          </div>
         </div>
 
         <!-- Right Column: Products List -->
