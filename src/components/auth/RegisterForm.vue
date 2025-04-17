@@ -100,7 +100,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
-import { AuthService } from '@/services/AuthService';
+import { AuthService } from '@/services/authService.js';
 
 const router = useRouter();
 
