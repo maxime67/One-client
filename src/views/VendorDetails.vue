@@ -62,7 +62,7 @@
         <div class="space-y-6 lg:col-span-2">
           <!-- CVE Severity Distribution -->
           <div v-if="stats" class="bg-dark-600 border border-primary-500/20 rounded-xl overflow-hidden">
-            <div class="p-5">
+            <div  v-if="stats.severityDistribution" class="p-5">
               <SeverityDistribution :data="stats.severityDistribution" />
               <div class="mt-4 text-center text-sm text-gray-400">
                 Average CVSS Score: <span class="text-white font-medium">{{ stats.avgCvssScore }}</span>
@@ -251,11 +251,6 @@ export default {
         const statsResponse = await vendorService.getVendorCVEStats(vendorId);
         stats.value = statsResponse.data;
 
-        // Initialize chart when stats are available
-        if (stats.value && stats.value.cveTimeline) {
-          initTimelineChart();
-        }
-
         // Fetch vendor products and CVEs
         fetchVendorProducts();
         fetchVendorCVEs();
@@ -305,67 +300,6 @@ export default {
       } finally {
         cvesLoading.value = false;
       }
-    };
-
-    const initTimelineChart = () => {
-      if (!stats.value || !stats.value.cveTimeline) return;
-
-      setTimeout(() => {
-        const ctx = document.querySelector('canvas').getContext('2d');
-
-        const timelineData = stats.value.cveTimeline;
-        const labels = timelineData.map(item => item.month);
-        const data = timelineData.map(item => item.count);
-
-        timelineChart.value = new Chart(ctx, {
-          type: 'bar',
-          data: {
-            labels: labels,
-            datasets: [{
-              label: 'CVEs per Month',
-              data: data,
-              backgroundColor: 'rgba(55, 195, 209, 0.6)',
-              borderColor: 'rgba(55, 195, 209, 1)',
-              borderWidth: 1
-            }]
-          },
-          options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            plugins: {
-              legend: {
-                display: true,
-                labels: {
-                  color: '#CCD0DB'
-                }
-              },
-              tooltip: {
-                backgroundColor: 'rgba(0, 20, 75, 0.9)',
-                padding: 12
-              }
-            },
-            scales: {
-              y: {
-                beginAtZero: true,
-                grid: {
-                  color: 'rgba(255, 255, 255, 0.05)'
-                },
-                ticks: {
-                  color: '#99A1B7'
-                }
-              },
-              x: {
-                grid: {
-                  color: 'rgba(255, 255, 255, 0.05)'
-                },
-                ticks: {
-                  color: '#99A1B7'
-                }
-              }
-            }
-          }
-        });
-      }, 100);
     };
 
     const formatDate = (dateString) => {

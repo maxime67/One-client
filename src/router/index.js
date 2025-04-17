@@ -10,6 +10,22 @@ const routes = [
         }
     },
     {
+        path: '/login',
+        name: 'Login',
+        component: () => import('../components/auth/LoginForm.vue'),
+        meta: {
+            title: 'Login'
+        }
+    },
+    {
+        path: '/register',
+        name: 'Register',
+        component: () => import('../components/auth/RegisterForm.vue'),
+        meta: {
+            title: 'Register'
+        }
+    },
+    {
         path: '/cves',
         name: 'CveExplorer',
         component: () => import('../views/CveExplorer.vue'),
