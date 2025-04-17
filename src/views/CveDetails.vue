@@ -228,6 +228,7 @@ import { format } from 'date-fns';
 import LoadingSpinner from '../components/common/LoadingSpinner.vue';
 import CveSeverityIndicator from '../components/cve/CveSeverityIndicator.vue';
 import cveService from '../services/cveService';
+import router from "@/router/index.js";
 
 export default {
   name: 'CveDetails',
@@ -256,6 +257,7 @@ export default {
         const { data } = await cveService.getCVEById(cveId);
         cve.value = data;
       } catch (err) {
+        router.push("/login")
         console.error('Error fetching CVE details:', err);
         error.value = true;
       } finally {
