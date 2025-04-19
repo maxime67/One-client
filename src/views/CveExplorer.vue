@@ -142,10 +142,7 @@ export default {
     const hasActiveFilters = () => {
       return Object.keys(filters).some(key => {
         const value = filters[key];
-        return (
-            (typeof value === 'string' && value !== '') ||
-            (typeof value === 'number' && value !== null)
-        );
+        return ((typeof value === 'string' && value !== '') || (typeof value === 'number' && true));
       });
     };
 

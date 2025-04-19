@@ -24,7 +24,7 @@
         ></div>
       </div>
 
-      <div v-if="showScore" class="absolute -right-6 -top-1 text-xs font-medium" :class="[textColorClass]">
+      <div v-if="showScore" class="absolute -right-4 -top-1 text-xs font-medium" :class="[textColorClass]">
         {{ score }}
       </div>
     </div>

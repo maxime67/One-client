@@ -46,12 +46,9 @@
               <p class="mt-1 text-sm text-gray-300 line-clamp-2">
                 {{ cve.description }}
               </p>
-              <div class="mt-2 flex flex-wrap gap-2">
+              <div class="mt-2 flex flex-wrap gap-12">
                 <div v-if="cve.cvssScore" class="flex items-center">
                   <CveSeverityIndicator :score="cve.cvssScore" :show-text="false" />
-                  <span class="ml-2 text-sm font-medium" :class="getScoreTextClass(cve.cvssScore)">
-                    {{ cve.cvssScore.toFixed(1) }}
-                  </span>
                 </div>
 
                 <div v-if="cve.affectedProducts && cve.affectedProducts.length > 0" class="text-xs text-gray-400">
@@ -113,7 +110,6 @@ export default {
           cves.value = [...cves.value, ...data.cves];
         } else {
           cves.value = data.cves;
-          console.log(data.cves);
         }
 
         totalPages.value = data.pagination.totalPages;
@@ -133,7 +129,6 @@ export default {
 
     const formatDate = (dateString) => {
       try {
-        console.log(dateString)
         return format(new Date(dateString), 'MMM d, yyyy');
       } catch (e) {
         return 'Unknown date';

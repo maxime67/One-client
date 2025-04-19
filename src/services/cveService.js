@@ -78,15 +78,4 @@ export default {
         return api.get('/cves/stats/summary');
     },
 
-    /**
-     * Récupère les statistiques temporelles des CVE
-     */
-    getCVETimeline(period = 'month', limit = 12) {
-        return api.get('/cves/stats/timeline', {
-            params: {
-                period,
-                limit
-            }
-        });
-    }
 };

@@ -117,7 +117,7 @@
             </div>
 
             <!-- CVSS Score and Severity -->
-            <div class="mt-4 md:mt-0 md:ml-6 md:w-48 flex flex-col items-start md:items-end">
+            <div class="mt-4 md:mt-0 md:ml-6 md:w-48 flex flex-col items-start">
               <div v-if="cve.cvssScore" class="mb-2">
                 <CveSeverityIndicator
                     :score="cve.cvssScore"
