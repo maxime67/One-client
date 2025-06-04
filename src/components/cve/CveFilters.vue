@@ -65,6 +65,11 @@
         <div class="grid grid-cols-2 gap-4">
           <div>
             <label for="minCvss" class="block text-xs text-gray-500 mb-1">Min</label>
+            <!-- Input permettant de donner une valeur minimal au Score cvss recherché
+                 v-model permet d'associer la variable "localFilters.minCvss", la valeur du champs sera donc associé à cette variable
+                 @change permet d'exécuter une méthode à chaque modification du champs, dans notre cas cela mettra a jour la liste rendue de CVE fitrées
+                 On effectue une première validation de la données avec les arguments "min, max, step"
+             -->
             <input
                 type="number"
                 id="minCvss"
@@ -73,11 +78,13 @@
                 min="0"
                 max="10"
                 step="0.1"
-                class="w-full bg-dark-700 border border-dark-400 text-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-400"
+                class="w-full bg-dark-700 border border-dark-400 text-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2
+                focus:ring-primary-500/50 focus:border-primary-400"
             />
           </div>
           <div>
             <label for="maxCvss" class="block text-xs text-gray-500 mb-1">Max</label>
+            <!-- On effectue le meme travail que précédement, mais on associe la valeur renseignée à une autre variable "localFilters.maxCvss -->
             <input
                 type="number"
                 id="maxCvss"
@@ -91,35 +98,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Date Range -->
-<!--      <div>-->
-<!--        <label class="block text-sm font-medium text-gray-400 mb-1">-->
-<!--          Published Date Range-->
-<!--        </label>-->
-<!--        <div class="grid grid-cols-2 gap-4">-->
-<!--          <div>-->
-<!--            <label for="startDate" class="block text-xs text-gray-500 mb-1">From</label>-->
-<!--            <input-->
-<!--                type="date"-->
-<!--                id="startDate"-->
-<!--                v-model="localFilters.startDate"-->
-<!--                @change="updateFilters"-->
-<!--                class="w-full bg-dark-700 border border-dark-400 text-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-400"-->
-<!--            />-->
-<!--          </div>-->
-<!--          <div>-->
-<!--            <label for="endDate" class="block text-xs text-gray-500 mb-1">To</label>-->
-<!--            <input-->
-<!--                type="date"-->
-<!--                id="endDate"-->
-<!--                v-model="localFilters.endDate"-->
-<!--                @change="updateFilters"-->
-<!--                class="w-full bg-dark-700 border border-dark-400 text-white rounded-lg py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-400"-->
-<!--            />-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
 
       <!-- Advanced Filters Toggle -->
       <div>
@@ -215,15 +193,26 @@ export default {
   },
   emits: ['update:filters', 'apply'],
   setup(props, { emit }) {
+    // LocalFilters regroupe la liste des valeurs fournies par l'utilisateur
+    // Ces valeurs sont utilisés par le suite au sein d'une requete
+    // Chaque valeur afine la recherche
     const localFilters = reactive({
       search: '',
+      // Chaine de caractère spécifiant la sévérité recherchée
       severity: '',
+      // Valeur minimal du score Cvss recherché
       minCvss: null,
+      // Valeur maximal du score Cvss recherché
       maxCvss: null,
+      // Date de publication minimal
       startDate: '',
+      // Date de publication maximal
       endDate: '',
+      // Nom de l'éditeur (recherche tous les enregistrements qui utilisent le/les caractère-s fournie)
       vendor: '',
+      // Nom du produit (recherche tous les enregistrements qui utilisent le/les caractère-s fournie)
       product: '',
+      // identifiant du CWE recherché
       cweId: ''
     });
 
